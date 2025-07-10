@@ -21,11 +21,11 @@ class SEO {
     private static $viewId = '';
 
     public static function init() {
-        if (!file_exists(BASE_PATH . "/Locales/" . LANG . "/seo.json")) {
-            throw new \Exception('SEO data file not found: ' . BASE_PATH . "/Locales/" . LANG . "/seo.json");
+        if (!file_exists(BASE_PATH . "/Data/Locales/" . LANG . "/seo.json")) {
+            throw new \Exception('SEO data file not found: ' . BASE_PATH . "/Data/Locales/" . LANG . "/seo.json");
         }
 
-        $seoFile = BASE_PATH . "/Locales/" . LANG . "/seo.json";
+        $seoFile = BASE_PATH . "/Data/Locales/" . LANG . "/seo.json";
         self::$SEOData = json_decode(file_get_contents($seoFile), true);
         
         self::$props['title'] = self::$SEOData['title'] ?? '';

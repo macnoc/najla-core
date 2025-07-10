@@ -4,7 +4,7 @@ namespace Najla\Core;
 
 use AltoRouter;
 use Najla\Core\SEO;
-use Najla\Core\Helper;
+use Najla\Core\View;
 
 class Route
 {
@@ -52,7 +52,10 @@ class Route
             SEO::set('description', x('general.404.description'));
 
             http_response_code(404);
-            Helper::getView('404');
+
+            $viewInstance = new View();
+
+            $viewInstance->renderError(404);
         }
     }
 
@@ -65,7 +68,8 @@ class Route
                 SEO::setViewId($name);
             }
 
-            Helper::getView($view, $data);
+            $viewInstance = new View();
+            $viewInstance->render($view, $data);
         }, $name);
     }
 

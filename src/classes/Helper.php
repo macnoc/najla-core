@@ -9,36 +9,6 @@ namespace Najla\Core;
  */
 class Helper
 {
-    private static $viewServices = null;
-
-    private static function loadViewServices()
-    {
-        if (Config::get('view_services') === null) {
-            return null;
-        }
-        if (self::$viewServices === null) {
-            self::$viewServices = Config::get('view_services');
-        }
-        return self::$viewServices;
-    }
-
-    public static function getView($view, $data = [])
-    {
-        $services = self::loadViewServices();
-
-        if ($services !== null) {
-            foreach ($services as $key => $serviceClass) {
-                if (method_exists($serviceClass, 'getInstance')) {
-                    $data[$key] = $serviceClass::getInstance();
-                }
-            }
-        }
-
-        extract($data);
-
-        $view = str_replace('.', '/', $view);
-        require_once BASE_PATH . '/Views/' . $view . '.view.php';
-    }
 
     public static function generateUsername($email)
     {

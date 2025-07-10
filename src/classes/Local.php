@@ -15,7 +15,7 @@ class Local
             self::$translator = new Translator(LANG);
             self::$translator->addLoader('json', new JsonFileLoader());
 
-            $localeFile = BASE_PATH . '/Locales/' . LANG . '/translations/messages.json';
+            $localeFile = BASE_PATH . '/Data/Locales/' . LANG . '/translations/messages.json';
             if (file_exists($localeFile)) {
                 self::$translator->addResource('json', $localeFile, LANG);
             } else {
@@ -28,11 +28,13 @@ class Local
 
     public static function setLocale(): void
     {
+        date_default_timezone_set(Config::get('locales.available.' . LANG . '.timezone'));
+        setlocale(LC_TIME, LANG . '.utf8', LANG, 'english');
         setlocale(LC_ALL, LANG . '.utf8');
         putenv('LC_ALL=' . LANG . '.utf8');
         putenv('LANG=' . LANG);
         textdomain("messages");
-        bindtextdomain("messages", BASE_PATH . "/Locales");
+        bindtextdomain("messages", BASE_PATH . "/Data/Locales");
         bind_textdomain_codeset("messages", 'UTF-8');
     }
 }

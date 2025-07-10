@@ -2,6 +2,7 @@
 
 use Najla\Services\TranslationService;
 use Najla\Core\ErrorHandler;
+use Najla\Core\Local;
 
 function log_error($message)
 {
@@ -19,7 +20,7 @@ function log_error($message)
 if (!function_exists('x')) {
     function x($key, $parameters = [], $locale = null)
     {
-        return TranslationService::getInstance()->trans($key, $parameters, $locale);
+        return Local::translator()->trans($key, $parameters, $locale);
     }
 }
 

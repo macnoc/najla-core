@@ -3,8 +3,7 @@
 namespace Najla\Core;
 
 use Rakit\Validation\Validator;
-use Najla\Core\Config;
-use Najla\Validation\CorrectPassword;
+use Najla\Core\View;
 
 class Controller
 {
@@ -56,7 +55,6 @@ class Controller
     public function inputsAsFormAndValidate($rules)
     {
         $validator = new Validator;
-        $validator->addValidator('correct_password', new CorrectPassword());
 
         $validation = $validator->validate($_POST + $_FILES, $rules);
 
@@ -90,13 +88,15 @@ class Controller
 
     public function view($view, $data = [])
     {
-        Helper::getView($view, $data);
+        $viewInstance = new View();
+        $viewInstance->render($view, $data);
     }
 
     public function view404()
     {
         http_response_code(404);
-        Helper::getView('404');
+        $viewInstance = new View();
+        $viewInstance->renderError(404);
     }
 
     public function redirect($url, $redirect_to = null)

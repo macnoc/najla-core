@@ -24,6 +24,7 @@
         "php": ">=8.2",
         "altorouter/altorouter": "^2.0",
         "monolog/monolog": "^3.7",
-        "symfony/translation": "^7.2"
+        "symfony/translation": "^7.2",
+        "rakit/validation": "^1.4"
     }
 }
