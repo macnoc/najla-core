@@ -30,11 +30,11 @@ class App
 
     private function loadRoutes()
     {
-        if (!file_exists(BASE_PATH . '/Routes')) {
+        if (!file_exists(BASE_PATH . '/routes')) {
             throw new \Exception('Routes folder not found');
         }
 
-        $routes_files = glob(BASE_PATH . '/{Routes/*.php,Routes/**/*.php}', GLOB_BRACE | GLOB_NOSORT);
+        $routes_files = glob(BASE_PATH . '/{routes/*.php,routes/**/*.php}', GLOB_BRACE | GLOB_NOSORT);
 
         foreach ($routes_files as $file) {
             require_once($file);

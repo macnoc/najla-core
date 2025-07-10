@@ -34,16 +34,16 @@ class View
         $view = str_replace('.', '/', $view);
 
         if (!$this->viewExists($view)) {
-            throw new \Exception('View not found: ' . BASE_PATH . '/Views/' . $view . '.view.php');
+            throw new \Exception('View not found: ' . BASE_PATH . '/views/' . $view . '.view.php');
         }
 
-        require_once BASE_PATH . '/Views/' . $view . '.view.php';
+        require_once BASE_PATH . '/views/' . $view . '.view.php';
     }
 
     public function viewExists($view)
     {
         $view = str_replace('.', '/', $view);
-        return file_exists(BASE_PATH . '/Views/' . $view . '.view.php');
+        return file_exists(BASE_PATH . '/views/' . $view . '.view.php');
     }
 
     public function renderError($error, $data = [])

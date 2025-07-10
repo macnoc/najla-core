@@ -9,7 +9,7 @@ class Config
     static public function init() {
         self::$config = new \stdClass();
         
-        $configFile = BASE_PATH . '/Config/config.php';
+        $configFile = BASE_PATH . '/config/config.php';
         
         if (file_exists($configFile)) {
             $config = require $configFile;

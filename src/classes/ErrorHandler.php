@@ -21,7 +21,7 @@ class ErrorHandler
         register_shutdown_function([__CLASS__, 'handleShutdown']);
 
         self::$logger = new Logger('Error');
-        self::$logger->pushHandler(new StreamHandler(BASE_PATH . '/Data/Logs/php_error.log'));
+        self::$logger->pushHandler(new StreamHandler(BASE_PATH . '/data/logs/php_error.log'));
     }
 
     public static function handleError($level, $message, $file = '', $line = '')
