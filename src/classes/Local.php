@@ -37,4 +37,9 @@ class Local
         bindtextdomain("messages", BASE_PATH . "/data/locales");
         bind_textdomain_codeset("messages", 'UTF-8');
     }
+
+    public static function getLang()
+    {
+        return explode('_', LANG)[0];
+    }
 }

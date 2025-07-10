@@ -91,7 +91,7 @@ class SEO {
         self::$json_ld = json_encode($schema);
     }
 
-    public static function getSEO() {
+    public static function render() {
         if (!self::$initialized) {
             self::init();
         }
