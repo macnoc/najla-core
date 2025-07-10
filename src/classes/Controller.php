@@ -33,9 +33,9 @@ class Controller
     public function inputsAsJsonAndValidate($rules)
     {
         $validator = new Validator([
-            'required' => x('validation.required'),
-            'email' => x('validation.email'),
-            'in' => x('validation.in')
+            'required' => __('validation.required'),
+            'email' => __('validation.email'),
+            'in' => __('validation.in')
         ]);
 
         $inputs = $this->inputsAsJson();
@@ -90,6 +90,12 @@ class Controller
     {
         $viewInstance = new View();
         $viewInstance->render($view, $data);
+    }
+
+    public function page($page, $data = [])
+    {
+        $viewInstance = new View();
+        $viewInstance->renderPage($page, $data);
     }
 
     public function view404()

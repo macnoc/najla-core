@@ -17,7 +17,7 @@ class View
         return $this->viewServices;
     }
 
-    public function render($view, $data = [])
+    private function injectViewServices(&$data)
     {
         $services = $this->loadViewServices();
 
@@ -28,22 +28,27 @@ class View
                 }
             }
         }
+    }
+
+    public function render($view, $data = [])
+    {
+        $this->injectViewServices($data);
 
         extract($data);
 
         $view = str_replace('.', '/', $view);
 
         if (!$this->viewExists($view)) {
-            throw new \Exception('View not found: ' . BASE_PATH . '/views/' . $view . '.view.php');
+            throw new \Exception('View not found: ' . ROOT . '/views/' . $view . '.view.php');
         }
 
-        require_once BASE_PATH . '/views/' . $view . '.view.php';
+        require_once ROOT . '/views/' . $view . '.view.php';
     }
 
     public function viewExists($view)
     {
         $view = str_replace('.', '/', $view);
-        return file_exists(BASE_PATH . '/views/' . $view . '.view.php');
+        return file_exists(ROOT . '/views/' . $view . '.view.php');
     }
 
     public function renderError($error, $data = [])
@@ -54,12 +59,12 @@ class View
 
         $errors = [
             '404' => [
-                'title' => x('Page not found'),
-                'description' => x('The page you are looking for does not exist.'),
+                'title' => __('Page not found'),
+                'description' => __('The page you are looking for does not exist.'),
             ],
             '500' => [
-                'title' => x('Server error'),
-                'description' => x('An error occurred on the server.'),
+                'title' => __('Server error'),
+                'description' => __('An error occurred on the server.'),
             ],
         ];
 
@@ -79,5 +84,26 @@ class View
         </body>
         </html>';
         }
+    }
+
+    public function renderPage($page, $data = [])
+    {
+        $this->injectViewServices($data);
+
+        extract($data);
+
+        $page = str_replace('.', '/', $page);
+
+        if (!$this->pageExists($page)) {
+            throw new \Exception('Page not found: ' . ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php');
+        }
+
+        require_once ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php';
+    }
+
+    public function pageExists($page)
+    {
+        $page = str_replace('.', '/', $page);
+        return file_exists(ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php');
     }
 }

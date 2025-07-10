@@ -56,8 +56,6 @@ class Route
 
     public static function view($route, $view, $name = null, $data = [])
     {
-        
-
         return self::$router->map('GET', $route, function () use ($view, $name, $data) {
             if($name){
                 SEO::setViewId($name);
@@ -65,6 +63,18 @@ class Route
 
             $viewInstance = new View();
             $viewInstance->render($view, $data);
+        }, $name);
+    }
+
+    public static function page($route, $page, $name = null, $data = [])
+    {
+        return self::$router->map('GET', $route, function () use ($page, $name, $data) {
+            if($name){
+                SEO::setViewId($name);
+            }
+
+            $viewInstance = new View();
+            $viewInstance->renderPage($page, $data);
         }, $name);
     }
 

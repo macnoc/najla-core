@@ -11,7 +11,7 @@ class App
 {
     public function __construct()
     {
-        define('BASE_PATH', Path::base());
+        define('ROOT', Path::base());
 
         Config::init();
         ErrorHandler::init();
@@ -30,11 +30,11 @@ class App
 
     private function loadRoutes()
     {
-        if (!file_exists(BASE_PATH . '/routes')) {
+        if (!file_exists(ROOT . '/routes')) {
             throw new \Exception('Routes folder not found');
         }
 
-        $routes_files = glob(BASE_PATH . '/{routes/*.php,routes/**/*.php}', GLOB_BRACE | GLOB_NOSORT);
+        $routes_files = glob(ROOT . '/{routes/*.php,routes/**/*.php}', GLOB_BRACE | GLOB_NOSORT);
 
         foreach ($routes_files as $file) {
             require_once($file);
