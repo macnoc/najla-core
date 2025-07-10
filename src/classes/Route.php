@@ -48,13 +48,8 @@ class Route
                 call_user_func_array([$controller, $match['target'][1]], $match['params']);
             }
         } else {
-            SEO::set('title', x('general.404.title'));
-            SEO::set('description', x('general.404.description'));
-
             http_response_code(404);
-
             $viewInstance = new View();
-
             $viewInstance->renderError(404);
         }
     }
