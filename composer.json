@@ -1,0 +1,30 @@
+{
+    "name" : "macnoc/najla-core",
+    "license": "MIT",
+    "type": "library",
+    "description": "Najla Core Library",
+    "keywords": ["najla", "core"],
+    "homepage": "https://macnoc.com",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Nabil Makhnouq",
+            "email": "info@macnoc.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Najla\\Core\\": "src/classes/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require": {
+        "php": ">=8.2",
+        "altorouter/altorouter": "^2.0",
+        "monolog/monolog": "^3.7",
+        "vlucas/phpdotenv": "^5.6",
+        "symfony/translation": "^7.2"
+    }
+}
