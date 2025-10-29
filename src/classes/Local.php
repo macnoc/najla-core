@@ -42,4 +42,12 @@ class Local
     {
         return explode('_', LANG)[0];
     }
+
+    public static function getData($key)
+    {
+        if (!Config::get('locales.available.' . LANG . '.' . $key)) {
+            return Config::get('locales.available.' . Config::get('locales.default') . '.' . $key);
+        }
+        return Config::get('locales.available.' . LANG . '.' . $key);
+    }
 }
