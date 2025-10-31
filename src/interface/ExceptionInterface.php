@@ -1,6 +1,6 @@
 <?php
 
-namespace Najla\Interface;
+namespace Najla\Interfaces;
 
 interface ExceptionInterface
 {
