@@ -105,7 +105,7 @@ class SEO {
         }
 
         return "
-            <title>" . self::get('title') . " | " . Config::get('sitename') . "</title>
+            <title>" . self::get('title') . " | " . Config::get('app.name') . "</title>
 
             <meta name='description' content='" . self::get('description') . "'>
             <link rel='icon' type='image/png' href='" . Config::get('url') . "/assets/favicon.png'>
@@ -121,7 +121,7 @@ class SEO {
             <meta name='twitter:url' content='" . self::getPageUrl() . "'>
             <meta name='twitter:domain' content='{$_SERVER['HTTP_HOST']}'>
 
-            <meta name='generator' content='" . Config::get('sitename') . "'>
+            <meta name='generator' content='" . Config::get('app.name') . "'>
             <meta name='author' content='Nabil Makhnouq'>
 
             <link rel='canonical' href='" . self::get('canonical') . "'>
