@@ -15,7 +15,8 @@
     "autoload": {
         "psr-4": {
             "Najla\\Core\\": "src/classes/",
-            "Najla\\Exceptions\\": "src/exceptions/"
+            "Najla\\Exceptions\\": "src/exceptions/",
+            "Najla\\Interfaces\\": "src/interfaces/"
         },
         "files": [
             "src/helpers.php"
