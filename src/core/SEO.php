@@ -3,6 +3,16 @@ namespace Najla\Core;
 
 use Najla\Core\Config;
 
+/**
+ * Class SEO
+ * 
+ * This class provides utility functions for the application.
+ * 
+ * @package     Najla\Core 
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
+ */
 class SEO {
 
     private static $props = [
@@ -20,12 +30,20 @@ class SEO {
     private static $initialized = false;
     private static $viewId = '';
 
+    /**
+     * Initialize the SEO
+     * 
+     * This method:
+     * - Initializes the SEO
+     * 
+     * @return void
+     */
     public static function init() {
-        if (!file_exists(ROOT . "/data/locales/" . LANG . "/seo.json")) {
-            throw new \Exception('SEO data file not found: ' . ROOT . "/data/locales/" . LANG . "/seo.json");
+        if (!file_exists(ROOT . "/Data/locales/" . LANG . "/seo.json")) {
+            throw new \Exception('SEO data file not found: ' . ROOT . "/Data/locales/" . LANG . "/seo.json");
         }
 
-        $seoFile = ROOT . "/data/locales/" . LANG . "/seo.json";
+        $seoFile = ROOT . "/Data/locales/" . LANG . "/seo.json";
         self::$SEOData = json_decode(file_get_contents($seoFile), true);
         
         self::$props['title'] = self::$SEOData['title'] ?? '';
@@ -37,6 +55,14 @@ class SEO {
         self::$initialized = true;
     }
 
+    /**
+     * Get the page URL
+     * 
+     * This method:
+     * - Returns the page URL
+     * 
+     * @return string The page URL
+     */
     public static function getPageUrl() {
         $uri = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_SPECIAL_CHARS);
         
@@ -53,6 +79,15 @@ class SEO {
         return $url;
     }
 
+    /**
+     * Get the property
+     * 
+     * This method:
+     * - Returns the property
+     * 
+     * @param string $name The name
+     * @return mixed The property
+     */
     public static function get($name) {
         if (!self::$initialized) {
             self::init();
@@ -73,6 +108,16 @@ class SEO {
         return self::$props[$name];
     }
 
+    /**
+     * Set the property
+     * 
+     * This method:
+     * - Sets the property
+     * 
+     * @param string $name The name
+     * @param mixed $value The value
+     * @return void
+     */
     public static function set($name, $value) {
         if (!self::$initialized) {
             self::init();
@@ -83,6 +128,15 @@ class SEO {
         }
     }
 
+    /**
+     * Set the schema
+     * 
+     * This method:
+     * - Sets the schema
+     * 
+     * @param array $schema The schema
+     * @return void
+     */
     public static function setSchema($schema) {
         if (!self::$initialized) {
             self::init();
@@ -91,6 +145,14 @@ class SEO {
         self::$json_ld = json_encode($schema);
     }
 
+    /**
+     * Render the SEO
+     * 
+     * This method:
+     * - Renders the SEO
+     * 
+     * @return string The SEO
+     */
     public static function render() {
         if (!self::$initialized) {
             self::init();
@@ -131,6 +193,15 @@ class SEO {
         ";
     }
 
+    /**
+     * Set the view ID
+     * 
+     * This method:
+     * - Sets the view ID
+     * 
+     * @param string $id The ID
+     * @return void
+     */
     public static function setViewId($id) {
         if (!self::$initialized) {
             self::init();

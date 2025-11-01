@@ -2,14 +2,36 @@
 
 namespace Najla\Core;
 
+/**
+ * Config.php 
+ * 
+ * The configuration class
+ * 
+ * This class is responsible for loading and managing the application configuration.
+ *
+ * @package     Najla\Core
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
+ */
+
 class Config
 {
     private static $config;
 
+    /**
+     * Initialize the configuration
+     * 
+     * This method:
+     * - Loads the configuration file
+     * - Sets up the configuration object
+     * 
+     * @throws Exception If the configuration file is not found
+     */
     static public function init() {
         self::$config = new \stdClass();
         
-        $configFile = ROOT . '/config/config.php';
+        $configFile = ROOT . '/Config/config.php';
         
         if (file_exists($configFile)) {
             $config = require $configFile;
@@ -19,6 +41,16 @@ class Config
         }
     }
 
+    /**
+     * Get a configuration value
+     * 
+     * This method:
+     * - Retrieves a configuration value by key
+     * - Supports dot notation for nested keys
+     * 
+     * @param string $key The configuration key
+     * @return mixed The configuration value, or null if not found
+     */
     static public function get($key){
         if (strpos($key, '.') !== false) {
             $keys = explode('.', $key);
@@ -44,6 +76,16 @@ class Config
         return isset(self::$config->$key) ? self::$config->$key : null;
     }
 
+    /**
+     * Set a configuration value
+     * 
+     * This method:
+     * - Sets a configuration value by key
+     * - Supports dot notation for nested keys
+     * 
+     * @param string $key The configuration key
+     * @param mixed $value The configuration value
+     */
     static public function set($key, $value){
         if (strpos($key, '.') !== false) {
             $keys = explode('.', $key);

@@ -1,9 +1,23 @@
 <?php
 
-use Najla\Services\TranslationService;
+/**
+ * This file contains helper functions for the application.
+ * 
+ * @package     Najla\Core 
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
+ */
+
 use Najla\Core\ErrorHandler;
 use Najla\Core\Local;
 
+/**
+ * This function is used to log an error.
+ * 
+ * @param string $message
+ * @return void
+ */
 function log_error($message)
 {
     ErrorHandler::handleException(new \Exception($message));

@@ -2,10 +2,28 @@
 
 namespace Najla\Core;
 
+/**
+ * Class View
+ * 
+ * This class provides utility functions for the application.
+ * 
+ * @package     Najla\Core 
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
+ */
 class View
 {
     private $viewServices = null;
 
+    /**
+     * Load the view services
+     * 
+     * This method:
+     * - Loads the view services
+     * 
+     * @return array The view services
+     */
     private function loadViewServices()
     {
         if (Config::get('view_services') === null) {
@@ -17,6 +35,15 @@ class View
         return $this->viewServices;
     }
 
+    /**
+     * Inject the view services
+     * 
+     * This method:
+     * - Injects the view services
+     * 
+     * @param array $data The data
+     * @return void
+     */
     private function injectViewServices(&$data)
     {
         $services = $this->loadViewServices();
@@ -30,6 +57,16 @@ class View
         }
     }
 
+    /**
+     * Render the view
+     * 
+     * This method:
+     * - Renders the view
+     * 
+     * @param string $view The view
+     * @param array $data The data
+     * @return void
+     */
     public function render($view, $data = [])
     {
         $this->injectViewServices($data);
@@ -39,18 +76,37 @@ class View
         $view = str_replace('.', '/', $view);
 
         if (!$this->viewExists($view)) {
-            throw new \Exception('View not found: ' . ROOT . '/views/' . $view . '.view.php');
+            throw new \Exception('View not found: ' . ROOT . '/Views/' . $view . '.view.php');
         }
 
-        require_once ROOT . '/views/' . $view . '.view.php';
+        require_once ROOT . '/Views/' . $view . '.view.php';
     }
 
+    /**
+     * Check if the view exists
+     * 
+     * This method:
+     * - Checks if the view exists
+     * 
+     * @param string $view The view
+     * @return bool True if the view exists, false otherwise
+     */
     public function viewExists($view)
     {
         $view = str_replace('.', '/', $view);
-        return file_exists(ROOT . '/views/' . $view . '.view.php');
+        return file_exists(ROOT . '/Views/' . $view . '.view.php');
     }
 
+    /**
+     * Render the error
+     * 
+     * This method:
+     * - Renders the error view if it exists otherwise renders a default error view
+     * 
+     * @param string $error The error
+     * @param array $data The data
+     * @return void
+     */
     public function renderError($error, $data = [])
     {
         if (is_numeric($error)) {
@@ -86,6 +142,16 @@ class View
         }
     }
 
+    /**
+     * Render the page
+     * 
+     * This method:
+     * - Renders the page
+     * 
+     * @param string $page The page
+     * @param array $data The data
+     * @return void
+     */
     public function renderPage($page, $data = [])
     {
         $this->injectViewServices($data);
@@ -95,15 +161,24 @@ class View
         $page = str_replace('.', '/', $page);
 
         if (!$this->pageExists($page)) {
-            throw new \Exception('Page not found: ' . ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php');
+            throw new \Exception('Page not found: ' . ROOT . '/Data/locales/' . LANG . '/pages/' . $page . '.page.php');
         }
 
-        require_once ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php';
+        require_once ROOT . '/Data/locales/' . LANG . '/pages/' . $page . '.page.php';
     }
 
+    /**
+     * Check if the page exists
+     * 
+     * This method:
+     * - Checks if the page exists
+     * 
+     * @param string $page The page
+     * @return bool True if the page exists, false otherwise
+     */
     public function pageExists($page)
     {
         $page = str_replace('.', '/', $page);
-        return file_exists(ROOT . '/data/locales/' . LANG . '/pages/' . $page . '.page.php');
+        return file_exists(ROOT . '/Data/locales/' . LANG . '/pages/' . $page . '.page.php');
     }
 }

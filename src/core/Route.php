@@ -6,34 +6,101 @@ use AltoRouter;
 use Najla\Core\SEO;
 use Najla\Core\View;
 
+/**
+ * Class Route
+ * 
+ * This class provides utility functions for the application.
+ * 
+ * @package     Najla\Core 
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
+ */
 class Route
 {
     private static $router;
 
+    /**
+     * Initialize the router
+     * 
+     * This method:
+     * - Initializes the router
+     * 
+     * @return void
+     */
     public static function init()
     {
         self::$router = new AltoRouter();
     }
 
+    /**
+     * Get the router instance
+     * 
+     * This method:
+     * - Returns the router instance
+     * 
+     * @return AltoRouter The router instance
+     */
     public static function route(){
         return self::$router;
     }
 
+    /**
+     * Map a GET route
+     * 
+     * This method:
+     * - Maps a GET route
+     * 
+     * @param string $route The route
+     * @param callable $callback The callback
+     * @param string $name The name
+     * @return void
+     */
     public static function get($route, $callback, $name = null)
     {
         return self::$router->map('GET', $route, $callback, $name);
     }
 
+    /**
+     * Map a POST route
+     * 
+     * This method:
+     * - Maps a POST route
+     * 
+     * @param string $route The route
+     * @param callable $callback The callback
+     * @param string $name The name
+     * @return void
+     */
     public static function post($route, $callback, $name = null)
     {
         return self::$router->map('POST', $route, $callback, $name);
     }
 
+    /**
+     * Map a PUT route
+     * 
+     * This method:
+     * - Maps a PUT route
+     * 
+     * @param string $route The route
+     * @param callable $callback The callback
+     * @param string $name The name
+     * @return void
+     */
     public static function put($route, $callback, $name = null)
     {
         return self::$router->map('PUT', $route, $callback, $name);
     }
 
+    /**
+     * Dispatch the router
+     * 
+     * This method:
+     * - Dispatches the router
+     * 
+     * @return void
+     */
     public static function dispatch()
     {
         $match = self::$router->match();
@@ -54,6 +121,18 @@ class Route
         }
     }
 
+    /**
+     * Map a view route
+     * 
+     * This method:
+     * - Maps a view route
+     * 
+     * @param string $route The route
+     * @param string $view The view
+     * @param string $name The name
+     * @param array $data The data
+     * @return void
+     */
     public static function view($route, $view, $name = null, $data = [])
     {
         return self::$router->map('GET', $route, function () use ($view, $name, $data) {
@@ -66,6 +145,18 @@ class Route
         }, $name);
     }
 
+    /**
+     * Map a page route
+     * 
+     * This method:
+     * - Maps a page route
+     * 
+     * @param string $route The route
+     * @param string $page The page
+     * @param string $name The name
+     * @param array $data The data
+     * @return void
+     */
     public static function page($route, $page, $name = null, $data = [])
     {
         return self::$router->map('GET', $route, function () use ($page, $name, $data) {

@@ -6,10 +6,24 @@ namespace Najla\Core;
  * Class Helper
  * 
  * This class provides utility functions for the application.
+ * 
+ * @package     Najla\Core 
+ * @author      Nabil Makhnouq
+ * @version     1.0.0
+ * @since       File available since Release 1.0.0
  */
 class Helper
 {
 
+    /**
+     * Generate a username from an email address
+     * 
+     * This method:
+     * - Generates a username from an email address
+     * 
+     * @param string $email The email address
+     * @return string The username
+     */
     public static function generateUsername($email)
     {
         $name_part = explode('@', $email)[0];
@@ -42,7 +56,6 @@ class Helper
         
         return trim($first_name . ' ' . $last_name);
     }
-
 
     /**
      * Formats a number into a short human-readable string with suffix.
@@ -85,12 +98,23 @@ class Helper
         return $n_format . $suffix;
     }
 
+    /**
+     * Generate a random string
+     *
+     * @param int $length The length of the string (default: 8).
+     * @return string The generated string.
+     */
     public static function generateRandomString($length =  8)
     {
         $selector = substr(md5(uniqid()), 0, $length);
         return $selector;
     }
 
+    /**
+     * Generate a UUID
+     *
+     * @return string The generated UUID.
+     */
     public static function generateUuid()
     {
         return bin2hex(random_bytes(16));
