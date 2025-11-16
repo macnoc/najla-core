@@ -19,12 +19,42 @@ use Najla\Core\View;
  */
 class Controller
 {
+    private $validator;
+
     /**
      * Controller constructor.
      * 
      * Initializes the controller
      */
     public function __construct() {}
+
+    /**
+     * Initialize validator
+     * 
+     * This method:
+     * - Initializes the validator
+     */
+    private function validator()
+    {
+        if ($this->validator === null) {
+            $this->validator = new Validator([
+                'required' => __('validation.required'),
+                'email' => __('validation.email'),
+                'in' => __('validation.in')
+            ]);
+
+            $customValidators = Config::get('custom_validators');
+
+            if ($customValidators !== null) {
+                foreach ($customValidators as $key => $validatorClass) {
+                    if (method_exists($validatorClass, 'check')) {
+                        $this->validator->addValidator($key, new $validatorClass());
+                    }
+                }
+            }
+        }
+        return $this->validator;
+    }
 
     /**
      * Get the inputs as JSON
@@ -80,11 +110,7 @@ class Controller
      */
     public function inputsAsJsonAndValidate($rules)
     {
-        $validator = new Validator([
-            'required' => __('validation.required'),
-            'email' => __('validation.email'),
-            'in' => __('validation.in')
-        ]);
+        $validator = $this->validator();
 
         $inputs = $this->inputsAsJson();
         if (!$inputs) {
@@ -114,7 +140,7 @@ class Controller
      */
     public function inputsAsFormAndValidate($rules)
     {
-        $validator = new Validator;
+        $validator = $this->validator();
 
         $validation = $validator->validate($_POST + $_FILES, $rules);
 
