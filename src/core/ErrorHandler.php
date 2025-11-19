@@ -40,7 +40,7 @@ class ErrorHandler
     public static function init()
     {
         error_reporting(E_ALL);
-        ini_set('display_errors', Config::get('debug') ? 1 : 0);
+        ini_set('display_errors', Config::get('app.debug') ? 1 : 0);
         ini_set('log_errors', 1);
         set_error_handler([__CLASS__, 'handleError']);
         set_exception_handler([__CLASS__, 'handleException']);
@@ -70,7 +70,7 @@ class ErrorHandler
         $logLevel = self::mapErrorLevel($level);
         self::$logger->log($logLevel, $message, ['errorId' => $errorId, 'file' => $file, 'line' => $line]);
 
-        if (Config::get('debug')) {
+        if (Config::get('app.debug')) {
             echo "<b>Error:</b> [$level] $message in $file on line $line<br>";
         }
     }
@@ -95,7 +95,7 @@ class ErrorHandler
             'trace' => $exception->getTraceAsString()
         ]);
 
-        if (Config::get('debug')) {
+        if (Config::get('app.debug')) {
             echo "<b>Exception:</b> " . $exception->getMessage() . " in " . $exception->getFile() . " on line " . $exception->getLine() . "<br>";
             echo nl2br($exception->getTraceAsString());
         }
@@ -125,7 +125,7 @@ class ErrorHandler
                 'line' => $error['line']
             ]);
 
-            if (Config::get('debug')) {
+            if (Config::get('app.debug')) {
                 echo "<b>Shutdown Error:</b> " . $error['message'] . " in " . $error['file'] . " on line " . $error['line'] . "<br>";
             }
         }

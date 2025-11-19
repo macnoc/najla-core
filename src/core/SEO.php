@@ -70,7 +70,7 @@ class SEO {
             return '';
         }
         
-        $url = Config::get('url') . $uri;
+        $url = Config::get('app.url') . $uri;
         
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
             return '';
@@ -170,7 +170,7 @@ class SEO {
             <title>" . self::get('title') . " | " . Config::get('app.name') . "</title>
 
             <meta name='description' content='" . self::get('description') . "'>
-            <link rel='icon' type='image/png' href='" . Config::get('url') . "/assets/favicon.png'>
+            <link rel='icon' type='image/png' href='" . Config::get('app.url') . "/assets/favicon.png'>
 
             <meta property='og:image' content='" . self::get('image') . "'>
             <meta property='og:url' content='" . self::getPageUrl() . "'>
