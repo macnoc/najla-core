@@ -24,10 +24,10 @@ class AppException extends \Exception
      * 
      * @param string $message The message
      * @param int $code The code
-     * @param string $error The error
+     * @param string|null $error The error
      * @return void
      */
-    public function __construct(string $message, int $code = 400, string $error = '')
+    public function __construct(string $message, int $code = 400, string|null $error = null)
     {
         parent::__construct($message, $code);
         $this->error = $error;
@@ -39,9 +39,9 @@ class AppException extends \Exception
      * This method:
      * - Returns the error
      * 
-     * @return string The error
+     * @return string|null The error
      */
-    public function getError(): string
+    public function getError(): string|null
     {
         return $this->error;
     }
