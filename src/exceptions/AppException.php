@@ -14,7 +14,7 @@ namespace Najla\Exceptions;
  */
 class AppException extends \Exception
 {
-    private $error;
+    private $userMessage;
 
     /**
      * Construct the exception
@@ -24,25 +24,25 @@ class AppException extends \Exception
      * 
      * @param string $message The message
      * @param int $code The code
-     * @param string|null $error The error
+     * @param string|null $userMessage The user message (optional)
      * @return void
      */
-    public function __construct(string $message, int $code = 400, string|null $error = null)
+    public function __construct(string $message, int $code = 400, string|null $userMessage = null)
     {
         parent::__construct($message, $code);
-        $this->error = $error;
+        $this->userMessage = $userMessage;
     }
 
     /**
-     * Get the error
+     * Get the user message
      * 
      * This method:
-     * - Returns the error
+     * - Returns the user message
      * 
-     * @return string|null The error
+     * @return string|null The user message
      */
-    public function getError(): string|null
+    public function getUserMessage(): string|null
     {
-        return $this->error;
+        return $this->userMessage;
     }
 }
