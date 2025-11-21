@@ -43,6 +43,6 @@ class AppException extends \Exception
      */
     public function getUserMessage(): string|null
     {
-        return __($this->userMessage) ?? null;
+        return $this->userMessage ?? null;
     }
 }
