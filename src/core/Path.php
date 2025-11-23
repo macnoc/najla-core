@@ -31,10 +31,15 @@ class Path
     {
         $requestUri = $_SERVER['REQUEST_URI'] ?? '';
 
-        // Escape special regex characters in the URI, then replace '*' with '.*'
-        // We use '#' as a delimiter for preg_quote to avoid escaping slashes unnecessarily,
-        // which will be handled by the regex engine itself.
+        // Escape special regex characters in the URI, then prepare for wildcard replacement.
+        // We use '#' as a delimiter for preg_quote to avoid escaping slashes unnecessarily.
         $pattern = preg_quote($uri, '#');
+
+        // Replace '\*?' with '(?:.*)?' to handle optional wildcard segments (e.g., /path/*?)
+        // The (?:...) creates a non-capturing group.
+        $pattern = str_replace('\*?', '(?:.*)?', $pattern);
+
+        // Replace '\*' with '.*' for standard wildcard segments (e.g., /path/*)
         $pattern = str_replace('\*', '.*', $pattern);
 
         // Add start and end anchors to ensure the entire URI matches the pattern
