@@ -21,7 +21,7 @@ use Throwable;
  */
 class ErrorHandler
 {
-    
+
     private static $logger;
 
     /**
@@ -47,7 +47,7 @@ class ErrorHandler
         register_shutdown_function([__CLASS__, 'handleShutdown']);
 
         self::$logger = new Logger('Error');
-        self::$logger->pushHandler(new StreamHandler(ROOT . '/data/logs/php_error.log'));
+        self::$logger->pushHandler(new StreamHandler(ROOT . '/Data/logs/php_error.log'));
     }
 
     /**
@@ -139,7 +139,7 @@ class ErrorHandler
      * 
      * @return string The error ID
      */
-    private static function generateErrorId(): string 
+    private static function generateErrorId(): string
     {
         return date('Ymd') . '-' . substr(uniqid(), -6);
     }
