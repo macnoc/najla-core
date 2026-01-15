@@ -1,9 +1,12 @@
 {
-    "name" : "macnoc/najla-core",
+    "name": "macnoc/najla-core",
     "license": "MIT",
     "type": "library",
     "description": "Najla Core Library",
-    "keywords": ["najla", "core"],
+    "keywords": [
+        "najla",
+        "core"
+    ],
     "homepage": "https://macnoc.com",
     "minimum-stability": "dev",
     "authors": [
@@ -27,6 +30,7 @@
         "altorouter/altorouter": "^2.0",
         "monolog/monolog": "^3.7",
         "symfony/translation": "^7.2",
-        "rakit/validation": "^1.4"
+        "rakit/validation": "^1.4",
+        "symfony/security-csrf": "^7.3"
     }
 }
