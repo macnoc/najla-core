@@ -142,7 +142,7 @@ function esc_css($string)
  * This function is used to escape numbers.
  *
  * @param int|null $number
- * @return int
+ * @return int|null
  */
 function esc_number($number)
 {
@@ -156,7 +156,7 @@ function esc_number($number)
  * This function is used to escape email addresses.
  *
  * @param string|null $email
- * @return string
+ * @return string|null
  */
 function esc_email($email)
 {
