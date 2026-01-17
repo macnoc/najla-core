@@ -151,3 +151,17 @@ function esc_number($number)
     }
     return (int) $number;
 }
+
+/**
+ * This function is used to escape email addresses.
+ *
+ * @param string|null $email
+ * @return string
+ */
+function esc_email($email)
+{
+    if ($email === null || !is_string($email)) {
+        return null;
+    }
+    return trim(filter_var($email, FILTER_SANITIZE_EMAIL));
+}
