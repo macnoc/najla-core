@@ -41,7 +41,8 @@ class Route
      * 
      * @return AltoRouter The router instance
      */
-    public static function route(){
+    public static function route()
+    {
         return self::$router;
     }
 
@@ -58,7 +59,20 @@ class Route
      */
     public static function get($route, $callback, $name = null)
     {
-        return self::$router->map('GET', $route, $callback, $name);
+        $middleware = function (...$params) use ($callback, $name) {
+            if ($name) {
+                SEO::setViewId($name);
+            }
+
+            if (is_array($callback) && is_string($callback[0])) {
+                $controller = new $callback[0]();
+                return call_user_func_array([$controller, $callback[1]], $params);
+            }
+
+            return call_user_func_array($callback, $params);
+        };
+
+        return self::$router->map('GET', $route, $middleware, $name);
     }
 
     /**
@@ -108,7 +122,7 @@ class Route
         if (is_array($match)) {
             if (is_callable($match['target'])) {
                 call_user_func_array($match['target'], $match['params']);
-            } 
+            }
             // Hantera controller metoder [Controller::class, 'method']
             else if (is_array($match['target'])) {
                 $controller = new $match['target'][0]();
@@ -136,7 +150,7 @@ class Route
     public static function view($route, $view, $name = null, $data = [])
     {
         return self::$router->map('GET', $route, function () use ($view, $name, $data) {
-            if($name){
+            if ($name) {
                 SEO::setViewId($name);
             }
 
@@ -160,7 +174,7 @@ class Route
     public static function page($route, $page, $name = null, $data = [])
     {
         return self::$router->map('GET', $route, function () use ($page, $name, $data) {
-            if($name){
+            if ($name) {
                 SEO::setViewId($name);
             }
 

@@ -26,7 +26,9 @@ class Controller
      * 
      * Initializes the controller
      */
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     /**
      * Initialize validator
@@ -37,6 +39,7 @@ class Controller
     private function validator()
     {
         if ($this->validator === null) {
+            // TODO: Move this to Config for more flexibility
             $this->validator = new Validator([
                 'required' => __('validation.required'),
                 'email' => __('validation.email'),
